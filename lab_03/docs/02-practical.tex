@@ -1,0 +1,203 @@
+\section*{Задание 1}
+\subsection*{Постановка задачи}
+
+Написать функцию, которая принимает целое число и возвращает первое четное число, не меньшее аргумента. 
+
+\subsection*{Решение}
+
+\begin{lstlisting}[label=first,caption=Решение задания №1, language=lisp]
+(defun near-even (x) 
+(if (equal (rem x 2) 0)
+x
+(+ x 1)
+)
+)
+
+\end{lstlisting}
+
+\section*{Задание №2}
+\subsection*{Постановка задачи}
+Написать функцию, которая принимает число и возвращает число того же знака, но с модулем на 1 больше модуля аргумента.
+
+\subsection*{Решение}
+
+\begin{lstlisting}[label=second,caption=Решение задания №2, language=lisp]
+(defun abs-plus-one (x)
+(defun abs-plus-1 (x) 
+(if (> x 0)
+(+ x 1)
+(- x 1)
+)
+)
+\end{lstlisting}
+
+\section*{Задание №3}
+\subsection*{Постановка задачи}
+Написать функцию, которая принимает два числа и возвращает список из этих чисел, расположенный по возрастанию.
+
+\subsection*{Решение}
+\begin{lstlisting}[label=third,caption=Решение задания №3, language=lisp]
+(defun sort-pair (x y) 
+(if (> x y)
+(list x y)
+(list y x)
+)
+)
+\end{lstlisting}
+
+\section*{Задание №4}
+\subsection*{Постановка задачи}
+Написать функцию, которая принимает три числа и возвращает Т только тогда, когда первое число расположено между вторым и третьим.
+
+\subsection*{Решение}
+\begin{lstlisting}[label=4,caption=Решение задания №4, language=lisp]
+(defun between (x y z) 
+(and (> x y) (< x z))
+)
+\end{lstlisting}
+
+\section*{Задание №5}
+\subsection*{Постановка задачи}
+Каков результат вычисления следующих выражений?
+
+\subsection*{Решение}
+\begin{lstlisting}[label=5,caption=Решение задания №5, language=lisp]
+(and `fee `fie `foe) -> FOE
+(or `fee `fie `foe) -> FEE
+(or nil `fie `foe) -> FIE
+(and nil `fie `foe) -> NIL
+(and (equal `abc `abc) `yes) -> YES
+(or (equal `abc `abc) `yes) -> T
+\end{lstlisting}
+
+\section*{Задание №6}
+\subsection*{Постановка задачи}
+Написать предикат, который принимает два числа аргумента и возвращает Т, если первое число не меньше второго.
+
+\subsection*{Решение}
+\begin{lstlisting}[label=6,caption=Решение задания №6, language=lisp]
+(defun greather-equal (x y) 
+(>= x y)
+)
+\end{lstlisting}
+
+\section*{Задание №7}
+\subsection*{Постановка задачи}
+Какой из следующих двух вариантов предиката ошибочен и почему? 
+
+\subsection*{Решение}
+\begin{lstlisting}[label=7,caption=Решение задания №7, language=lisp]
+(defun pred1 (x)
+(and (numberp x) (plusp x))); OK
+
+(defun pred2 (x)
+(and (plusp x) (numberp x))); RUNTIME ERROR
+\end{lstlisting}
+
+Второй вариант ошибочен, т.к. если в функцию будет передано не число и на него будет применена функция \textbf{plusp} (которая работает только с числовыми значениями), интерпретатор выдаст ошибку.
+
+\section*{Задание №8}
+\subsection*{Постановка задачи}
+Решить задачу 4, используя для ее решения конструкции IF, COND, AND/OR.
+
+\subsection*{Решение}
+\begin{lstlisting}[label=8,caption=Решение задания №8, language=lisp]
+(defun between-if (x y z) 
+(if (> x y) 
+(if (< x z)
+t
+)
+)
+)
+
+(defun between-cond (x y z) 
+(cond
+((<= x y) nil)
+((< x z) t)
+)
+)
+
+(defun between (x y z) 
+(and (> x y) (< x z))
+)
+\end{lstlisting}
+
+
+\section*{Задание №9}
+\subsection*{Постановка задачи}
+Переписать функцию how-alike, приведенную в лекции и использующую COND, используя конструкции IF, AND/OR.
+
+\subsection*{Решение}
+
+
+\section*{Контрольные вопросы}
+\textbf{Вопрос 1.} Базис Lisp. \newline
+\indent\textbf{Ответ. }
+Базис языка представлен:
+\begin{itemize}
+	\item структурами и атомами;
+	\item функциями;
+\end{itemize}
+
+Функции, входящие в базис языка:
+\begin{itemize}
+	\item atom, eq, cons, car, cdr;
+	\item cond, quote, lambda, eval, label.
+\end{itemize}
+
+\textbf{Вопрос 2.} Классификация функций.\newline
+\indent\textbf{Ответ.} 
+
+\begin{itemize}
+	\item чистые (с фиксированным количеством аргументов) математические функции;
+	\item рекурсивные функции;
+	\item специальные функции – формы (принимают произвольное количество аргументов или по разному обрабатывают аргументы);
+	\item псевдофункции (создающие «эффект» – отображающие на экране процесс обработки данных и т.п.);
+	\item функции с вариативными значениями, выбирающие одно значение;
+	\item функции высших порядков – функционалы (используются для построения синтаксически управляемых программ);
+\end{itemize}
+
+\textbf{Вопрос 3.} Способы создание функций.
+
+\textbf{Ответ.}
+\begin{itemize}
+	\item lambda выражения (lambda $\lambda$-список форма)
+	\item defun (defun f $\lambda$-выражение)
+\end{itemize}
+
+\textbf{Вопрос 4.} Работа функций and, or, if, cond. \newline
+\indent\textbf{Ответ. }
+Сигнатура функции \textbf{cond}:
+
+\indent(cond (предикат-1 результат-1)) \newline
+\indent(предикат-2 результат-2) \newline
+\indent...\newline
+\indent(предикат-n результат-n)\newline
+
+\indent Работа функции \textbf{cond}: 
+
+сначала просматриваются все предикаты в порядке следования, и если хоть один из них истинный, то cond возвращает результат, связанный с этим предикатом. Если ни один предикат не был истинным, то она вернет Nil. 
+
+Сигнатура функции \textbf{if}: 
+
+(if условие выражение-1 выражение-2)\newline
+
+\indent Работа функции \textbf{if}: 
+
+если условие истинно (T), то выполняется выражение-1, иначе (Nil) – выражение-2\newline
+
+Сигнатура функции \textbf{and}: 
+
+(and выражение-1 выражение-2 ... выражение-n)\newline
+
+\indent Работа функции \textbf{and}: 
+
+результат функции будет истинным, если все ее выражения истинны. В таком случае в качестве результата вернется значение выражения-n. В случае, если хотя бы одно выражение ложно (Nil), вычисление последующих выражений не производится и результатом функции является Nil.\newline
+
+Сигнатура функции \textbf{or}: 
+
+(or выражение-1 выражение-2 ... выражение-n)\newline
+
+Работа функции \textbf{or}: 
+
+результат функции будет ложным (Nil), если все ее выражения ложны. В случае, если хотя бы одно выражение истинно, вычисление последующих выражений не производится и результатом функции является значения выражения, которое первым в списке аргументов дало в результате истину.\newline

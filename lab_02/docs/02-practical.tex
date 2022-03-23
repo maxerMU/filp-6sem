@@ -1,0 +1,188 @@
+\section*{Задание 1}
+\subsection*{Постановка задачи}
+
+Составить диаграмму вычисления следующих выражений:
+
+\begin{enumerate}
+	\item (equal 3 (abs -3))
+	\item (equal (+ 1 2) 3)
+	\item (equal (* 4 7) 21)
+	\item (equal (* 2 3) (+ 7 2))
+	\item (equal (- 7 3) (* 3 2)))
+	\item (equal (abs (- 2 4)) 3)
+\end{enumerate}
+
+\subsection*{Решение}
+Решение оформленно на тетрадном листке бумаге. К отчету прилагается.
+
+\section*{Задание 2}
+\subsection*{Постановка задачи}
+
+Написать функцию, вычисляющую гипотенузу прямоугольного треугольника по заданным катетам и составить диаграмму ее вычисления. Решение.
+
+\subsection*{Решение}
+
+\begin{lstlisting}[label=second,caption=Решение задания №2, language=lisp]
+(defun hypotenuse (a b) (sqrt (+ (* a a) (* b b))))
+\end{lstlisting}
+
+\section*{Задание 3}
+\subsection*{Постановка задачи}
+Написать функцию, вычисляющую объем параллелепипеда по 3-м его сторонам, и составить диаграмму ее вычисления.
+
+\subsection*{Решение}
+
+\begin{lstlisting}[label=third,caption=Решение задания №3, language=lisp]
+(defun volume (a b c) (* a b c))
+\end{lstlisting}
+
+Диаграмма оформлена на тетрадном листе, прикрепленном к отчету.
+
+\section*{Задание 4}
+\subsection*{Постановка задачи}
+Каковы результаты вычисления следующих выражений? (объяснить возможную ошибку и
+варианты ее устранен6ия)
+
+\subsection*{Решение}
+
+\begin{lstlisting}[label=4xd,caption=Решение задания №4, language=lisp]
+(list 'a c) -> The variable C is unbound.
+;(list 'a 'c)
+(cons 'a 'b 'c) -> invalid number of arguments: 3
+;(cons 'a (cons 'b 'c))
+(cons 'a (b c)) -> Undefined function: B Undefined variable: C
+;(cons 'a (cons 'b 'c))
+(list 'a (b c)) -> Undefined function: B Undefined variable: C
+;(list 'a 'b 'c)
+(cons 'a '(b c)) -> (A B C)
+(list a '(b c)) ->  The variable A is unbound.
+(caddy (1 2 3 4 5)) -> Undefined function CADDY
+;(caddr '(1 2 3 4 5))
+(list (+ 1 '(length '(1 2 3)))) -> The value (LENGTH '(1 2 3)) is not of type NUMBER
+;(list (+ 1 (length '(1 2 3))))
+
+\end{lstlisting}
+
+\section*{Задание 5}
+\subsection*{Постановка задачи}
+Написать функцию \textbf{longer\_then} от двух списков- аргументов, которая возвращает T, если первый аргумент имеет большую длину.
+
+\subsection*{Решение}
+
+\begin{lstlisting}[label=5xd,caption=Решение задания №5, language=lisp]
+(defun longer_than (a b) (> (length a) (length b)))
+\end{lstlisting}
+
+\section*{Задание 6}
+\subsection*{Постановка задачи}
+Каковы результаты вычисления следующих выражений? 
+
+\subsection*{Решение}
+
+\begin{lstlisting}[label=6xd,caption=Решение задания №6, language=lisp]
+(cons 3 (list 5 6)) -> (3 5 6)
+(cons 3 `(list 5 6)) -> (3 LIST 5 6)
+(list 3 `from 8 `gives (- 9 3))) -> 3 FROM 9 GIVES 6
+(+ (length for 2 too)) (car '(21 22 23))) -> The variable FOR is unbound
+; (+ (length '(for 2 too)) (car '(21 22 23))) -> 24
+(cdr `(cons is short for ans)) -> (IS SHORT FOR ANS)
+(car (list one two)); VARIABLE ONE IS UNBOUND
+(car (list `one `two)) -> ONE
+
+\end{lstlisting}
+
+\section*{Задание 7}
+\subsection*{Постановка задачи}
+Дана функция \textbf{(defun mystery (x) (list (second x) (first x)))}. Какие результаты вычисления следующих выражений?
+
+\subsection*{Решение}
+
+\begin{lstlisting}[label=7xd,caption=Решение задания №7, language=lisp]
+(mystery (one two)) -> The variable TWO is unbound.
+(mystery one 'two)) -> The variable ONE is unbound.
+(mystery (last one two)) -> The variable ONE is unbound.
+(mystery free) -> The variable FREE is unbound.
+
+\end{lstlisting}
+
+\section*{Задание 8}
+\subsection*{Постановка задачи}
+Написать функцию, которая переводит температуру в системе Фаренгейта
+температуру по Цельсию (defum f-to-c (temp)...)
+
+\subsection*{Решение}
+
+\begin{lstlisting}[label=7xd,caption=Решение задания №8, language=lisp]
+(defun f-to-c (temp) (* (/ 5 9) (- temp 320)))
+(f-to-c 451) -> 655 / 9
+\end{lstlisting}
+
+\section*{Задание 9}
+\subsection*{Постановка задачи}
+Что получится при вычисления каждого из выражений?
+
+\subsection*{Решение}
+
+\begin{lstlisting}[label=7xd,caption=Решение задания №8, language=lisp]
+(list 'cons t NIL) -> (cons T NIL)
+(eval (list 'cons t NIL)) -> (T)
+(eval (eval (list 'cons t NIL))) -> Undefined function: T
+(apply #cons "(t NIL))
+(eval NIL) -> Nil
+(list 'eval NIL) -> (eval NIL)
+(eval (list 'eval NIL)) -> Nil
+\end{lstlisting}
+
+
+
+\section*{Контрольные вопросы}
+
+\textbf{Вопрос 1.} Базис Lisp. \newline
+\indent\textbf{Ответ. }
+Базис языка представлен:
+\begin{itemize}
+	\item структурами и атомами;
+	\item функциями;
+\end{itemize}
+
+Функции, входящие в базис языка:
+\begin{itemize}
+	\item atom, eq, cons, car, cdr;
+	\item cond, quote, lambda, eval, label.
+\end{itemize}
+
+
+\textbf{Вопрос 2.} Классификация функций языка Lisp.
+
+\textbf{Ответ.} 
+
+\begin{itemize}
+	\item чистые (с фиксированным количеством аргументов) математические функции;
+	\item рекурсивные функции;
+	\item специальные функции – формы (принимают произвольное количество аргументов или по разному обрабатывают аргументы);
+	\item псевдофункции (создающие «эффект» – отображающие на экране процесс обработки данных и т.п.);
+	\item функции с вариативными значениями, выбирающие одно значение;
+	\item функции высших порядков – функционалы (используются для построения синтаксически управляемых программ);
+\end{itemize}
+
+\textbf{Вопрос 3.} Способы создание функций.
+
+\textbf{Ответ.}
+\begin{itemize}
+	\item lambda выражения (lambda $\lambda$-список форма)
+	\item defun (defun f $\lambda$-выражение)
+\end{itemize}
+
+
+\textbf{Вопрос 4.} Функции \textbf{car}, \textbf{cdr}.
+
+\textbf{Ответ.} Функции $car$, $cdr$ являются базовыми функциями доступа к
+данным. car принимает точечную пару или список в качестве аргумента
+и возвращает первый элемент или $Nil$, соответственно. $cdr$ принимает точечную пару или список в качестве аргумента и возвращает все элементы
+кроме первого или $Nil$, соответственно.""\newline
+
+\textbf{Вопрос 5.} Функции \textbf{list}, \textbf{cons}.
+
+\textbf{Ответ.} Функции $list$, $cons$ являются функциями создания списков
+($cons$ – базовая, $list$ – нет). $cons$ создает списочную ячейку и устанавливает два указателя на аргументы. $list$ принимает переменное число аргументов и возвращает список, элементы которого – переданные в функцию
+аргументы.
